@@ -1,8 +1,8 @@
 import UIKit
 import ThemeKit
 import RxSwift
-import WalletConnectSign
-import WalletConnectUtils
+//import WalletConnectSign
+//import WalletConnectUtils
 import MarketKit
 
 protocol IWalletConnectMainService {
@@ -45,23 +45,23 @@ struct WalletConnectMainModule {
         return service.flatMap { viewController(service: $0, sourceViewController: sourceViewController) }
     }
 
-    static func viewController(session: WalletConnectSign.Session, sourceViewController: UIViewController?) -> UIViewController? {
-        let service = App.shared.walletConnectV2SessionManager.service
-        let pingService = WalletConnectV2PingService(service: service, socketConnectionService: App.shared.walletConnectV2SocketConnectionService, logger: App.shared.logger)
-
-        let mainService = WalletConnectV2MainService(
-                session: session,
-                service: service,
-                pingService: pingService,
-                manager: App.shared.walletConnectManager,
-                reachabilityManager: App.shared.reachabilityManager,
-                accountManager: App.shared.accountManager,
-                evmBlockchainManager: App.shared.evmBlockchainManager,
-                evmChainParser: WalletConnectEvmChainParser()
-        )
-
-        return viewController(service: mainService, sourceViewController: sourceViewController)
-    }
+//    static func viewController(session: WalletConnectSign.Session, sourceViewController: UIViewController?) -> UIViewController? {
+//        let service = App.shared.walletConnectV2SessionManager.service
+//        let pingService = WalletConnectV2PingService(service: service, socketConnectionService: App.shared.walletConnectV2SocketConnectionService, logger: App.shared.logger)
+//
+//        let mainService = WalletConnectV2MainService(
+//                session: session,
+//                service: service,
+//                pingService: pingService,
+//                manager: App.shared.walletConnectManager,
+//                reachabilityManager: App.shared.reachabilityManager,
+//                accountManager: App.shared.accountManager,
+//                evmBlockchainManager: App.shared.evmBlockchainManager,
+//                evmChainParser: WalletConnectEvmChainParser()
+//        )
+//
+//        return viewController(service: mainService, sourceViewController: sourceViewController)
+//    }
 
     static func viewController(service: IWalletConnectMainService, sourceViewController: UIViewController?) -> UIViewController? {
         let viewModel = WalletConnectMainViewModel(service: service)
@@ -73,7 +73,7 @@ struct WalletConnectMainModule {
             requestView.sourceViewController = viewController
 
             viewController.requestView = requestView
-        case is WalletConnectV2MainService: ()
+//        case is WalletConnectV2MainService: ()
         default: return nil
         }
 

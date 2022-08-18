@@ -9,7 +9,7 @@ class MainService {
     private let localStorage: LocalStorage
     private let storage: StorageKit.ILocalStorage
     private let launchScreenManager: LaunchScreenManager
-    private let walletConnectV2Manager: WalletConnectV2SessionManager
+//    private let walletConnectV2Manager: WalletConnectV2SessionManager
     private let presetTab: MainModule.Tab?
     private let disposeBag = DisposeBag()
 
@@ -31,11 +31,12 @@ class MainService {
         }
     }
 
-    init(localStorage: LocalStorage, storage: StorageKit.ILocalStorage, launchScreenManager: LaunchScreenManager, accountManager: AccountManager, walletManager: WalletManager, walletConnectV2Manager: WalletConnectV2SessionManager, presetTab: MainModule.Tab?) {
+//    init(localStorage: LocalStorage, storage: StorageKit.ILocalStorage, launchScreenManager: LaunchScreenManager, accountManager: AccountManager, walletManager: WalletManager, walletConnectV2Manager: WalletConnectV2SessionManager, presetTab: MainModule.Tab?) {
+    init(localStorage: LocalStorage, storage: StorageKit.ILocalStorage, launchScreenManager: LaunchScreenManager, accountManager: AccountManager, walletManager: WalletManager, presetTab: MainModule.Tab?) {
         self.localStorage = localStorage
         self.storage = storage
         self.launchScreenManager = launchScreenManager
-        self.walletConnectV2Manager = walletConnectV2Manager
+//        self.walletConnectV2Manager = walletConnectV2Manager
         self.presetTab = presetTab
 
         subscribe(disposeBag, accountManager.accountsObservable) { [weak self] in self?.sync(accounts: $0) }
@@ -65,9 +66,9 @@ extension MainService {
         hasWalletsRelay.asObservable()
     }
 
-    var showSessionRequestObservable: Observable<WalletConnectRequest> {
-        walletConnectV2Manager.sessionRequestReceivedObservable
-    }
+//    var showSessionRequestObservable: Observable<WalletConnectRequest> {
+//        walletConnectV2Manager.sessionRequestReceivedObservable
+//    }
 
     var initialTab: MainModule.Tab {
         if let presetTab = presetTab {

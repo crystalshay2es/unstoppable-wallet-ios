@@ -10,7 +10,7 @@ class WalletConnectListViewController: ThemeViewController {
 
     private let viewModel: WalletConnectListViewModel
     private let listViewV1: WalletConnectV1ListView
-    private let listViewV2: WalletConnectV2ListView
+//    private let listViewV2: WalletConnectV2ListView
 
     private let emptyView = PlaceholderView()
     private let bottomButtonHolder = BottomGradientHolder()
@@ -19,9 +19,10 @@ class WalletConnectListViewController: ThemeViewController {
     let tableView = SectionsTableView(style: .grouped)
     private weak var scanQrViewController: WalletConnectScanQrViewController?
 
-    init(listViewV1: WalletConnectV1ListView, listViewV2: WalletConnectV2ListView, viewModel: WalletConnectListViewModel) {
+//    init(listViewV1: WalletConnectV1ListView, listViewV2: WalletConnectV2ListView, viewModel: WalletConnectListViewModel) {
+    init(listViewV1: WalletConnectV1ListView, viewModel: WalletConnectListViewModel) {
         self.listViewV1 = listViewV1
-        self.listViewV2 = listViewV2
+//        self.listViewV2 = listViewV2
         self.viewModel = viewModel
 
         super.init()
@@ -76,10 +77,10 @@ class WalletConnectListViewController: ThemeViewController {
         subscribe(disposeBag, viewModel.showWalletConnectMainModuleSignal) { [weak self] in self?.show(walletConnectMainModule: $0) }
         subscribe(disposeBag, viewModel.newConnectionErrorSignal) { [weak self] in self?.show(newConnectionError: $0) }
         subscribe(disposeBag, listViewV1.reloadTableSignal) { [weak self] in self?.syncItems() }
-        subscribe(disposeBag, listViewV2.reloadTableSignal) { [weak self] in self?.syncItems() }
+//        subscribe(disposeBag, listViewV2.reloadTableSignal) { [weak self] in self?.syncItems() }
 
         listViewV1.viewDidLoad()
-        listViewV2.viewDidLoad()
+//        listViewV2.viewDidLoad()
 
         if viewModel.emptySessionList {
             startNewConnection()
@@ -127,7 +128,8 @@ class WalletConnectListViewController: ThemeViewController {
 extension WalletConnectListViewController: SectionsDataSource {
 
     func buildSections() -> [SectionProtocol] {
-        (listViewV2.sections(tableView: tableView) + listViewV1.sections(tableView: tableView)).compactMap { $0 }
+//        (listViewV2.sections(tableView: tableView) + listViewV1.sections(tableView: tableView)).compactMap { $0 }
+        listViewV1.sections(tableView: tableView)
     }
 
 }

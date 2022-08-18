@@ -15,11 +15,12 @@ class MainSettingsService {
     private let currencyKit: CurrencyKit.Kit
     private let appConfigProvider: AppConfigProvider
     private let walletConnectSessionManager: WalletConnectSessionManager
-    private let walletConnectV2SessionManager: WalletConnectV2SessionManager
+//    private let walletConnectV2SessionManager: WalletConnectV2SessionManager
 
     init(backupManager: BackupManager, accountManager: AccountManager, pinKit: IPinKit, termsManager: TermsManager,
          systemInfoManager: SystemInfoManager, currencyKit: CurrencyKit.Kit, appConfigProvider: AppConfigProvider,
-         walletConnectSessionManager: WalletConnectSessionManager, walletConnectV2SessionManager: WalletConnectV2SessionManager) {
+//         walletConnectSessionManager: WalletConnectSessionManager, walletConnectV2SessionManager: WalletConnectV2SessionManager) {
+         walletConnectSessionManager: WalletConnectSessionManager) {
         self.backupManager = backupManager
         self.accountManager = accountManager
         self.pinKit = pinKit
@@ -28,7 +29,7 @@ class MainSettingsService {
         self.currencyKit = currencyKit
         self.appConfigProvider = appConfigProvider
         self.walletConnectSessionManager = walletConnectSessionManager
-        self.walletConnectV2SessionManager = walletConnectV2SessionManager
+//        self.walletConnectV2SessionManager = walletConnectV2SessionManager
     }
 
 }
@@ -64,13 +65,14 @@ extension MainSettingsService {
     }
 
     var walletConnectSessionCount: Int {
-        walletConnectSessionManager.sessions.count + walletConnectV2SessionManager.sessions.count
+        walletConnectSessionManager.sessions.count// + walletConnectV2SessionManager.sessions.count
     }
 
     var walletConnectSessionCountObservable: Observable<Int> {
-        Observable.combineLatest(walletConnectSessionManager.sessionsObservable, walletConnectV2SessionManager.sessionsObservable).map {
-            $0.count + $1.count
-        }
+        walletConnectSessionManager.sessionsObservable.map { $0.count }
+//        Observable.combineLatest(walletConnectSessionManager.sessionsObservable, walletConnectV2SessionManager.sessionsObservable).map {
+//            $0.count + $1.count
+//        }
     }
 
     var currentLanguageDisplayName: String? {

@@ -81,8 +81,8 @@ class App {
     let termsManager: TermsManager
 
     let walletConnectSessionManager: WalletConnectSessionManager
-    let walletConnectV2SocketConnectionService: WalletConnectV2SocketConnectionService
-    let walletConnectV2SessionManager: WalletConnectV2SessionManager
+//    let walletConnectV2SocketConnectionService: WalletConnectV2SocketConnectionService
+//    let walletConnectV2SessionManager: WalletConnectV2SessionManager
     let walletConnectManager: WalletConnectManager
 
     let deepLinkManager: DeepLinkManager
@@ -263,23 +263,23 @@ class App {
         walletConnectSessionManager = WalletConnectSessionManager(storage: walletConnectSessionStorage, accountManager: accountManager)
         walletConnectManager = WalletConnectManager(accountManager: accountManager, evmBlockchainManager: evmBlockchainManager)
 
-        let walletClientInfo = WalletConnectClientInfo(
-                projectId: appConfigProvider.walletConnectV2ProjectKey ?? "c4f79cc821944d9680842e34466bfb",
-                relayHost: "relay.walletconnect.com",
-                name: "Unstoppable Wallet",
-                description: "Wallet App",
-                url: appConfigProvider.companyWebPageLink,
-                icons: []
-        )
+//        let walletClientInfo = WalletConnectClientInfo(
+//                projectId: appConfigProvider.walletConnectV2ProjectKey ?? "c4f79cc821944d9680842e34466bfb",
+//                relayHost: "relay.walletconnect.com",
+//                name: "Unstoppable Wallet",
+//                description: "Wallet App",
+//                url: appConfigProvider.companyWebPageLink,
+//                icons: []
+//        )
 
-        walletConnectV2SocketConnectionService = WalletConnectV2SocketConnectionService(reachabilityManager: reachabilityManager, logger: logger)
-        let walletConnectV2Service = WalletConnectV2Service(
-                connectionService: walletConnectV2SocketConnectionService,
-                info: walletClientInfo,
-                logger: logger
-        )
-        let walletConnectV2SessionStorage = WalletConnectV2SessionStorage(dbPool: dbPool)
-        walletConnectV2SessionManager = WalletConnectV2SessionManager(service: walletConnectV2Service, storage: walletConnectV2SessionStorage, accountManager: accountManager, currentDateProvider: CurrentDateProvider())
+//        walletConnectV2SocketConnectionService = WalletConnectV2SocketConnectionService(reachabilityManager: reachabilityManager, logger: logger)
+//        let walletConnectV2Service = WalletConnectV2Service(
+//                connectionService: walletConnectV2SocketConnectionService,
+//                info: walletClientInfo,
+//                logger: logger
+//        )
+//        let walletConnectV2SessionStorage = WalletConnectV2SessionStorage(dbPool: dbPool)
+//        walletConnectV2SessionManager = WalletConnectV2SessionManager(service: walletConnectV2Service, storage: walletConnectV2SessionStorage, accountManager: accountManager, currentDateProvider: CurrentDateProvider())
 
         deepLinkManager = DeepLinkManager()
         launchScreenManager = LaunchScreenManager(storage: StorageKit.LocalStorage.default)
@@ -306,7 +306,7 @@ class App {
                 logRecordManager: logRecordManager,
                 deepLinkManager: deepLinkManager,
                 evmLabelManager: evmLabelManager,
-                walletConnectV2SocketConnectionService: walletConnectV2SocketConnectionService,
+//                walletConnectV2SocketConnectionService: walletConnectV2SocketConnectionService,
                 nftMetadataSyncer: nftMetadataSyncer
         )
     }

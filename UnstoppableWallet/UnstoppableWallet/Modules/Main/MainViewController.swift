@@ -163,11 +163,12 @@ class MainViewController: ThemeTabBarController {
     }
 
     private func handle(request: WalletConnectRequest) {
-        guard let viewController = WalletConnectRequestModule.viewController(signService: App.shared.walletConnectV2SessionManager.service, request: request) else {
-            return
-        }
-
-        visibleController.present(ThemeNavigationController(rootViewController: viewController), animated: true)
+        return
+//        guard let viewController = WalletConnectRequestModule.viewController(signService: App.shared.walletConnectV2SessionManager.service, request: request) else {
+//            return
+//        }
+//
+//        visibleController.present(ThemeNavigationController(rootViewController: viewController), animated: true)
     }
 
 }
